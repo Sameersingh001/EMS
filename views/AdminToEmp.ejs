@@ -32,15 +32,27 @@
     <!-- Body -->
     <div class="p-8 space-y-8">
 
-      <div class="flex flex-row items-center justify-around">
-      
-      <a href="/delete/<%=emp.id %>"><button class=" w-32 bg-red-500 transition transform hover:scale-105 hover:bg-red-800 text-2xl h-10  text-white font-bold rounded-2xl shadow-2xl ">Delete</button></a>
+<div class="flex flex-col sm:flex-row items-center justify-around gap-4 w-full px-4">
 
-       <a href="/admin"><button class=" w-64 bg-blue-500 transition transform hover:scale-105 hover:bg-blue-800 text-2xl h-10  text-white font-bold rounded-2xl shadow-2xl ">Back to Admin</button></a>
+  <a href="/delete/<%=emp.id %>" class="w-full sm:w-auto">
+    <button class="w-full sm:w-32 bg-red-500 transition transform hover:scale-105 hover:bg-red-800 text-lg sm:text-2xl h-12 text-white font-bold rounded-2xl shadow-2xl">
+      Delete
+    </button>
+  </a>
 
-       <a href="/admin/update/emp/<%= emp.id %>"><button class=" w-32 bg-green-500 transition transform hover:scale-105 hover:bg-green-800 text-2xl h-10 text-white font-bold rounded-2xl  shadow-2xl ">Update</button></a>
+  <a href="/admin" class="w-full sm:w-auto">
+    <button class="w-full sm:w-64 bg-blue-500 transition transform hover:scale-105 hover:bg-blue-800 text-lg sm:text-2xl h-12 text-white font-bold rounded-2xl shadow-2xl">
+      Back to Admin
+    </button>
+  </a>
 
-    </div>
+  <a href="/admin/update/emp/<%= emp.id %>" class="w-full sm:w-auto">
+    <button class="w-full sm:w-32 bg-green-500 transition transform hover:scale-105 hover:bg-green-800 text-lg sm:text-2xl h-12 text-white font-bold rounded-2xl shadow-2xl">
+      Update
+    </button>
+  </a>
+
+</div>
 
       <!-- Grid Info -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
