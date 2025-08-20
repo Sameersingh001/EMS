@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Admin Dashboard</title>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white py-4 px-6 shadow-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-wide">Admin Dashboard</h1>
+            <a href="/logout">
+                <button
+                    class="w-full py-2 px-4 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition duration-200">Logout</button>
+             </a>
+
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Admin Section -->
+        <div
+            class="bg-gradient-to-br from-indigo-600 to-indigo-800 text-white p-6 rounded-2xl shadow-xl mb-8 hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1">
+            <h2 class="text-2xl sm:text-3xl font-extrabold mb-3 tracking-tight">Admin Profile</h2>
+            <div class="flex flex-col sm:flex-row items-center mb-4">
+                <!-- Placeholder for admin avatar -->
+                <img src="<%= admin.imageUrl %>" alt="<%= admin.name %> Avatar"
+                    class="w-16 h-16 rounded-full border-4 border-indigo-300 mb-4 sm:mb-0 sm:mr-4">
+                <div>
+                    <h3 class="text-xl sm:text-2xl font-semibold">
+                        <%= admin.name %>
+                    </h3>
+                    <p class="text-sm opacity-90">Email: <%= admin.email %>
+                    </p>
+                    <p class="text-sm opacity-90">Username: <%= admin.username %>
+                    </p>
+                    <p class="text-sm opacity-90 mt-1">Admin ID: <%= admin.id %>
+                    </p> <!-- Assuming an 'id' field -->
+                </div>
+            </div>  
+        </div>
+
+        <!-- Employees Section -->
+        <div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 tracking-tight">Employees</h2>
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+                <% employees.forEach((emp)=> { %>
+                    <div
+                        class="bg-white p-5 sm:p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-200 hover:border-blue-500">
+                        <div class="flex items-center mb-4">
+                            <!-- Placeholder for employee avatar -->
+                            <img src="<%= emp.imageUrl %>" alt="<%= emp.name %> Avatar"
+                                class="w-12 h-12 rounded-full mr-4 border-2 border-blue-300">
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
+                                    <%= emp.name %>
+                                </h3>
+                                <p class="text-sm text-gray-500">Role: <%= emp.role || 'Employee' %>
+                                </p> <!-- Assuming a 'role' field; customize as needed -->
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Email: <%= emp.email %>
+                        </p>
+                        <p class="text-gray-500 text-xs mb-4">ID: <%= emp.id %>
+                        </p>
+                        <p class="text-gray-600 text-sm mb-4">Department: <%= emp.department %>
+                        </p>
+                        <p class="text-gray-500 text-xs mb-4">Role: <%= emp.position %>
+                        </p>
+                        <a href="/admin/emp/<%=emp.id %>">
+                            <button
+                                class="w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition duration-200">View
+                                Details</button>
+                        </a>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-4 px-6 mt-8">
+        <div class="max-w-7xl mx-auto text-center text-sm">
+            &copy; 2025 Admin Dashboard. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>

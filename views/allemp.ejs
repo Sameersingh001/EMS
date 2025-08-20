@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Employees</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- Page Heading -->
+  <header class="max-w-7xl mx-auto mt-8 px-6">
+      <a href="/logout"><button class="bg-red-400 px-2 py-3 w-48 font-bold text-white text-2xl rounded-lg">Logout</button></a>
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">All Employees</h2>
+    <p class="text-gray-600">Manage and view all registered employees below.</p>
+  </header>
+
+  <!-- Employees Grid -->
+  <main class="max-w-7xl mx-auto mt-6 px-6">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <% employees.forEach(emp => { %>
+        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-xl transition">
+          <!-- Employee Image -->
+          <img src="<%= emp.imageUrl || 'https://via.placeholder.com/150' %>" 
+               alt="Employee Photo"
+               class="w-24 h-24 mx-auto rounded-full object-cover shadow-md border">
+
+          <!-- Employee Info -->
+          <div class="text-center mt-4">
+            <h3 class="text-lg font-semibold text-gray-800"><%= emp.name %></h3>
+            <p class="text-sm text-gray-500"><%= emp.position %> - <%= emp.department %></p>
+            <p class="text-sm text-gray-600 mt-1"><%= emp.email %></p>
+            <p class="text-sm text-gray-600">📞 <%= emp.phone %></p>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex justify-center mt-4 space-x-2">
+            <a href="/employees/<%= emp.id %>">
+                <button class="px-3 py-1 bg-blue-500 text-white text-sm rounded w-full hover:bg-blue-600"> View Employee</button>    
+            </a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+</body>
+</html>
