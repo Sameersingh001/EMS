@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 import Employee from "../model/Employee.js";
 import fs from "fs"
 import path from "path"
+import { error } from "console";
 
 
 function homepage(req, res){
@@ -73,6 +74,9 @@ async function Register(req, res) {
   try {
     
     let imagePath = null;
+    if (imagePath){
+      return res.render("Register", {error: "Please Add an Image"})
+    }
     if (req.file) {
       imagePath = `/uploads/${req.file.filename}`;
     }
