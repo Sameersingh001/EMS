@@ -8,7 +8,7 @@ router.get("/", controller.homepage)
 router.get("/register", controller.showRegister)
 router.get("/login", controller.showLogin)
 router.get("/profile/:id",Verify, controller.Deshboard )
-router.get("/allemployees", Verify, controller.allemp)
+router.get("/allemployees/:id", Verify, controller.allemp)
 router.get("/employees/:id", Verify, controller.employeepage)
 
 

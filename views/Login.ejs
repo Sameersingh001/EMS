@@ -53,11 +53,25 @@
       </div>
 
       <!-- Password -->
-      <div>
-        <label for="password" class="block text-purple-700 font-bold mb-2 text-lg">Password</label>
-        <input type="password" id="password" name="password" required
-          class="w-full px-4 py-3 border-2 border-red-300 rounded-xl focus:ring-4 focus:ring-red-400 focus:border-red-500 outline-none shadow-md transition duration-200 bg-red-50">
-      </div>
+<div class="relative">
+  <label class="block text-purple-700 font-bold mb-2 text-lg">Password</label>
+  <input 
+    type="password" 
+    id="password"
+    name="password" 
+    class="w-full px-4 py-3 border-2 border-red-300 rounded-xl focus:ring-4 focus:ring-red-400 focus:border-red-500 outline-none shadow-md transition duration-200 bg-red-50 pr-12" 
+    required
+  >
+
+  <!-- Toggle Button -->
+  <span 
+    id="toggleIcon"
+    onclick="togglePassword()" 
+    class="absolute right-4 top-11 cursor-pointer text-gray-500 hover:text-red-500 text-xl transition duration-200"
+  >
+    👁 <!-- default open eye -->
+  </span>
+</div>
 
       <!-- Submit -->
       <button type="submit"
@@ -74,6 +88,24 @@
       </p>
     </div>
   </div>
-    
+
+
+
+<script>
+  function togglePassword() {
+    const passwordField = document.getElementById("password");
+    const toggleIcon = document.getElementById("toggleIcon");
+
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      toggleIcon.textContent = "🙈"; // closed/blinking eye
+    } else {
+      passwordField.type = "password";
+      toggleIcon.textContent = "👁"; // open eye
+    }
+  }
+</script>
+
+
 </body>
 </html>

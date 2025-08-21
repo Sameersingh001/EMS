@@ -33,14 +33,16 @@ function showLogin(req,res){
 async function employeepage(req, res) {
     const ID = req.params.id
     const data = await Employee.findById(ID)
-
     res.render("employeepage", {data})
+
 }
 
 
 async function allemp(req, res) {
-  const employees = await Employee.find({ email: { $ne: "admin.page@gmail.com" } });
-  res.render("allemp", {employees})
+    const Id = req.params.id
+    const IdData = await Employee.findById(Id)
+    const employees = await Employee.find({ email: { $ne: "admin.page@gmail.com" },_id: { $ne: req.params.id }  });
+    res.render("allemp", {employees, IdData})
 }
 
 
