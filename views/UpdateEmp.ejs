@@ -10,12 +10,12 @@
 <body class="bg-gradient-to-br from-purple-200 via-blue-200 to-green-200 min-h-screen flex items-center justify-center">
   <div class="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 border-4 border-indigo-300">
     <h2 class="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-yellow-500 mb-6">Update Details</h2>
-    <form action="/profile/update/<%= employee._id %>" method="POST" class="space-y-6">
+    <form action="/profile/update/<%= employee._id %>" enctype="multipart/form-data" method="POST" class="space-y-6">
       
       <!-- Profile Image -->
       <div>
         <label class="block text-lg font-semibold text-purple-700 mb-2">Profile Image</label>
-        <input type="text" name="imageUrl" accept="image/*" value="<%=employee.imageUrl %>"
+        <input type="file" name="imageUrl" accept="image/*" value="<%=employee.imageUrl %>"
           class="w-full border-2 border-pink-400 p-3 rounded-lg focus:ring-2 focus:ring-yellow-400 bg-yellow-50 hover:bg-yellow-100 transition duration-200"/>
       </div>
       <!-- Username -->

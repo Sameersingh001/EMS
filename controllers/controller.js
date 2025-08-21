@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import Employee from "../model/Employee.js";
-import { render } from "ejs";
+import fs from "fs"
+import path from "path"
 
 
 function homepage(req, res){
@@ -70,6 +71,11 @@ async function Register(req, res) {
     } = req.body;
 
   try {
+    
+    let imagePath = null;
+    if (req.file) {
+      imagePath = `/uploads/${req.file.filename}`;
+    }
     // check if user exists
     const existingUser = await Employee.findOne({ email });
     if (existingUser) {
@@ -85,7 +91,7 @@ async function Register(req, res) {
       name,
       username,
       email,
-      imageUrl,
+      imageUrl:imagePath,
       phone,
       about,
       department,
@@ -157,15 +163,27 @@ async function updateEmployee(req ,res){
 async function saveUpdateEmp(req, res) {
   const ID = req.params.id
   const { username, phone, address, imageUrl, about } = req.body;
+
   try{
-    const employee = await Employee.findByIdAndUpdate(ID, 
-      {
-        username,
-        phone,
-        address,
-        about,
-        imageUrl
-      },
+    const employeedata = await Employee.findById(ID)
+
+    let imagePath = employeedata.imageUrl
+    if(req.file){
+      if(imagePath){
+        const oldPath =path.join(process.cwd(), imagePath )
+        fs.unlink(oldPath, () => {});
+      }
+      imagePath = `/uploads/${req.file.filename}`;
+    }
+      
+      const employee = await Employee.findByIdAndUpdate(ID, 
+        {
+          username,
+          phone,
+          address,
+          about,
+          imageUrl:imagePath
+        },
       {new:true}
     )
       if (!employee) {

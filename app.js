@@ -15,6 +15,7 @@ app.use(express.json())
 
 connectDB()
 
+app.use("/uploads", express.static("uploads"));
 app.use(cookieParser())
 app.use(express.urlencoded({extended : true}));
 app.use(methodOverride("_method")) 

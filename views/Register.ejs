@@ -44,7 +44,7 @@
     </h1>
 
     <!-- Form -->
-    <form action="/register" method="POST">
+    <form action="/register" method="POST" enctype="multipart/form-data">
 
 
       <% if (typeof error !== 'undefined') { %>
@@ -168,7 +168,7 @@
         <!-- Image URL -->
         <div>
           <label class="block text-purple-700 font-bold mb-2 text-lg">Profile Image URL</label>
-          <input type="text" name="imageUrl" class="w-full px-4 py-3 border-2 border-cyan-300 rounded-xl focus:ring-4 focus:ring-cyan-400 focus:border-cyan-500 outline-none shadow-md transition duration-200 bg-cyan-50">
+          <input type="file" name="imageUrl" class="w-full px-4 py-3 border-2 border-cyan-300 rounded-xl focus:ring-4 focus:ring-cyan-400 focus:border-cyan-500 outline-none shadow-md transition duration-200 bg-cyan-50">
         </div>
 
         <!-- Status -->

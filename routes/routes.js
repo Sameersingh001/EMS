@@ -1,6 +1,6 @@
 import express from "express"
 import controller from "../controllers/controller.js"
-import Verify from "../middleware/middle.js"
+import {Verify, upload} from "../middleware/middle.js"
 
 const router = express.Router()
 
@@ -21,8 +21,8 @@ router.get("/delete/:id", controller.deleteemp)
 
 
 router.post("/admin/update/emp/:id", controller.updatefromadmin)
-router.post('/register', controller.Register)
+router.post('/register', upload.single("imageUrl"), controller.Register)
 router.post('/login', controller.Login)
-router.post("/profile/update/:id", controller.saveUpdateEmp)
+router.post("/profile/update/:id", upload.single("imageUrl"), controller.saveUpdateEmp)
 
 export default router
