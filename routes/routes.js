@@ -12,7 +12,7 @@ router.get("/allemployees", Verify, controller.allemp)
 router.get("/employees/:id", Verify, controller.employeepage)
 
 
-router.get("/logout", controller.Logout)
+router.get("/logout/:id", controller.Logout)
 router.get("/profile/update/:id", Verify, controller.updateEmployee)
 router.get("/admin", Verify, controller.AdminPage)
 router.get("/admin/emp/:id",Verify, controller.employeeView)

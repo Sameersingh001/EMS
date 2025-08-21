@@ -26,7 +26,7 @@ function showLogin(req,res){
         res.render("Profile", {data});  
     }catch(err){
         res.send("Server Issue")
-    }
+    } 
 }
 
 
@@ -298,9 +298,20 @@ async function deleteemp(req,res){
 
 
 
-function Logout(req, res){
-    res.cookie("token","")
+async function Logout(req, res){
+
+  const id = req.params.id
+  try{
+
+    const employee =await Employee.findById(id)
+    if(employee){
+      res.cookie("token","")
+    }
     res.redirect("/login")
+  }
+  catch(err){
+    res.send("Server Error" + err.massage)
+  }
 }
 
 
