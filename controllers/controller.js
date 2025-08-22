@@ -3,8 +3,7 @@ import jwt from "jsonwebtoken"
 import Employee from "../model/Employee.js";
 import fs from "fs"
 import path from "path"
-import { error } from "console";
-
+import Task from "../model/TaskDB.js";
 
 function homepage(req, res){
   res.render("homepage")
@@ -22,8 +21,10 @@ function showLogin(req,res){
 
  async function Deshboard(req,res){
     try{
+        const id = req.params.id
         const data = await Employee.findOne({email: req.user.email})
-        res.render("Profile", {data});  
+        const taskData = await Task.find({assignedTo:id})
+        res.render("Profile", {data, taskData});  
     }catch(err){
         res.send("Server Issue")
     } 
@@ -235,6 +236,7 @@ async function AdminPage(req, res) {
   // fetch all employees (including admin itself)
 const employees = await Employee.find({ email: { $ne: "admin.page@gmail.com" } });
 const admin = await Employee.findOne({email:"admin.page@gmail.com"})
+
   // render admin page with employees
   return res.render("admin",  {admin ,employees} );
 
@@ -251,7 +253,9 @@ async function employeeView(req, res){
  try{
    const id = req.params.id
    const emp = await Employee.findById(id)
-   res.render("AdminToEmp", {emp})
+   const taskData = await Task.find({assignedTo:id})
+
+   res.render("AdminToEmp", {emp, taskData})
 
   }
   catch(err){
@@ -299,6 +303,56 @@ async function deleteemp(req,res){
 
 
 
+async function TaskForm(req, res){
+  const id = req.params.id
+  const emp = await Employee.findById(id)
+  res.render("taskForm", {emp})
+}
+
+
+async function Addtask(req ,res) {
+
+  const {title, description, deadline, status} = req.body
+  const empID = req.params.id
+
+  const newTask = new Task({
+    title,
+    deadline,
+    description,
+    status,
+    assignedTo : empID
+  })
+
+  await newTask.save();
+
+  res.redirect("/admin")
+  
+}
+
+async function updateTask(req, res) {
+  const TasksID = req.params.id
+  const {status} = req.body
+
+  await Task.findByIdAndUpdate(TasksID, {status})
+
+  res.redirect(req.get("referer") || "/");
+
+}
+
+
+async function DeleteTask(req, res) {
+  const TasksId = req.params.id
+  await Task.findByIdAndDelete(TasksId)
+  res.redirect(req.get("referer") || "/");
+}
+
+
+
+
+
+
+
+
 
 async function Logout(req, res){
 
@@ -320,6 +374,12 @@ async function Logout(req, res){
 
 
 
+
+
+
+
+
+
 export default {
     showRegister,
     showLogin,
@@ -336,6 +396,10 @@ export default {
     deleteemp,
     homepage,
     allemp,
-    employeepage
+    employeepage,
+    TaskForm,
+    Addtask,
+    updateTask,
+    DeleteTask
  
 }
