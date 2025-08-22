@@ -154,17 +154,13 @@ async function updateEmployee(req, res) {
 
 async function saveUpdateEmp(req, res) {
   const ID = req.params.id
-  const { username, phone, address, imageUrl, about } = req.body;
-
+  
   try {
+    const { username, phone, address, imageUrl, about } = req.body;
     const employeedata = await Employee.findById(ID)
 
     let imagePath = employeedata.imageUrl
     if (req.file) {
-      if (imagePath) {
-        const oldPath = path.join(process.cwd(), imagePath)
-        fs.unlink(oldPath, () => { });
-      }
       imagePath = `/uploads/${req.file.filename}`;
     }
 
