@@ -1,12 +1,12 @@
 import express from "express"
 import controller from "../controllers/controller.js"
-import {Verify, upload, isloggedin} from "../middleware/middle.js"
+import {Verify, upload} from "../middleware/middle.js"
 
 const router = express.Router()
 
 router.get("/", controller.homepage)
-router.get("/register",isloggedin, controller.showRegister)
-router.get("/login",isloggedin, controller.showLogin)
+router.get("/register", Verify, controller.showRegister)
+router.get("/login",Verify, controller.showLogin)
 router.get("/profile/:id",Verify, controller.Deshboard )
 router.get("/allemployees/:id", Verify, controller.allemp)
 router.get("/employees/:id", Verify, controller.employeepage)
