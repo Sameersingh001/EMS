@@ -4,6 +4,19 @@ import path from "path"
 
 const SECRET = "Authentication@Login_System"; // moved outside for clarity
 
+
+
+export function isloggedin(req, res, next){
+  const token = req.headers.cookie
+  const gettoken = token?.split("=")[1]
+  if(gettoken){
+    res.render("Profile")
+  }
+  else{
+    next()
+  }
+}
+
 // JWT Verify middleware
 export function Verify(req, res, next) {
   const authHeader = req.headers.cookie;
@@ -22,7 +35,13 @@ export function Verify(req, res, next) {
   }
 }
 
-  const uploadedpath = path.join(process.cwd(), "uploads")
+
+
+
+
+
+
+const uploadedpath = path.join(process.cwd(), "uploads")
 
 // Multer storage config
 const storage = diskStorage({

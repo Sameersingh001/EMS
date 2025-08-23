@@ -6,20 +6,34 @@
   <title>All Employees</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen">
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <!-- Logo / Heading -->
+      <h1 class="text-2xl font-bold text-indigo-700">EMS</h1>
+      <!-- Logout -->
+      <a href="/logout/<%= IdData.id %>">
+        <button class="bg-red-500 px-4 py-2 font-semibold text-white rounded-lg hover:bg-red-600 transition">
+          Logout
+        </button>
+      </a>
+    </div>
+  </nav>
 
   <!-- Page Heading -->
-  <header class="max-w-7xl mx-auto mt-8 px-6">
-      <a href="/logout/<%=IdData.id %>"><button class="bg-red-400 px-2 py-3 w-48 font-bold text-white text-2xl rounded-lg">Logout</button></a>
-    <h2 class="text-3xl font-bold text-gray-800 mb-4">All Employees</h2>
-    <p class="text-gray-600">Manage and view all registered employees below.</p>
+  <header class="max-w-7xl mx-auto mt-8 px-6 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">All Employees</h2>
+    <p class="text-gray-600">view all registered employees below.</p>
   </header>
 
   <!-- Employees Grid -->
-  <main class="max-w-7xl mx-auto mt-6 px-6">
+  <main class="max-w-8xl mx-auto mt-6 px-6 flex-1 ">
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <% employees.forEach(emp => { %>
-        <div class="bg-white shadow-lg rounded-xl p-6 hover:shadow-xl transition">
+        <div class="bg-white shadow-lg mt-3 rounded-xl p-6 hover:shadow-xl transition transform hover:scale-[1.02]">
+          
           <!-- Employee Image -->
           <img src="<%= emp.imageUrl || 'https://via.placeholder.com/150' %>" 
                alt="Employee Photo"
@@ -29,20 +43,27 @@
           <div class="text-center mt-4">
             <h3 class="text-lg font-semibold text-gray-800"><%= emp.name %></h3>
             <p class="text-sm text-gray-500"><%= emp.position %> - <%= emp.department %></p>
-            <p class="text-sm text-gray-600 mt-1"><%= emp.email %></p>
+            <p class="text-sm text-gray-600 mt-1 truncate"><%= emp.email %></p>
             <p class="text-sm text-gray-600">📞 <%= emp.phone %></p>
           </div>
 
           <!-- Actions -->
-          <div class="flex justify-center mt-4 space-x-2">
+          <div class="mt-4">
             <a href="/employees/<%= emp.id %>">
-                <button class="px-3 py-1 bg-blue-500 text-white text-sm rounded w-full hover:bg-blue-600"> View Employee</button>    
+              <button class="w-full px-3 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition">
+                View Employee
+              </button>
             </a>
           </div>
         </div>
       <% }) %>
     </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="bg-white text-center py-4 shadow-inner">
+    <p class="text-sm text-gray-500">&copy; <%= new Date().getFullYear() %> Employee Management System</p>
+  </footer>
 
 </body>
 </html>

@@ -34,7 +34,8 @@ function showLogin(req,res){
 async function employeepage(req, res) {
     const ID = req.params.id
     const data = await Employee.findById(ID)
-    res.render("employeepage", {data})
+    const tasks = await Task.find({assignedTo:ID})
+    res.render("employeepage", {data, tasks})
 
 }
 
@@ -320,7 +321,7 @@ async function Addtask(req ,res) {
 
   await newTask.save();
 
-  res.redirect("/admin")
+  res.redirect(`/admin/emp/${empID}`)
   
 }
 
