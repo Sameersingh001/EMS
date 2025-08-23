@@ -5,7 +5,7 @@ import {Verify, upload} from "../middleware/middle.js"
 const router = express.Router()
 
 router.get("/", controller.homepage)
-router.get("/register", Verify, controller.showRegister)
+router.get("/register", controller.showRegister)
 router.get("/login",Verify, controller.showLogin)
 router.get("/profile/:id",Verify, controller.Deshboard )
 router.get("/allemployees/:id", Verify, controller.allemp)
@@ -13,7 +13,7 @@ router.get("/employees/:id", Verify, controller.employeepage)
 router.get("/admin/task-form/:id", Verify, controller.TaskForm)
 
 
-
+    
 router.get("/logout/:id", controller.Logout)
 router.get("/profile/update/:id", Verify, controller.updateEmployee)
 router.get("/admin", Verify, controller.AdminPage)

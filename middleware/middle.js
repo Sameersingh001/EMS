@@ -19,7 +19,7 @@ export function Verify(req, res, next) {
     next();
 
   } catch {
-    return res.render("Login");
+    return res.redirect("/login");
   }
 }
 

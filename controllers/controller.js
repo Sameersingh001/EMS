@@ -18,6 +18,7 @@ function homepage(req, res) {
 
 
  async function showLogin(req, res) {
+  
     if(req.user){
      const data = await  Employee.findOne({email : req.user.email})
      if(data.email == "admin.page@gmail.com"){
@@ -25,7 +26,8 @@ function homepage(req, res) {
      }
      return res.redirect(`/profile/${data._id}`)
     }
-     res.render("Login")
+     
+  res.render("Login")
 
 }
 
