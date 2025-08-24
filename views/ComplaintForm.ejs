@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <title>Complaint Form</title>
+</head>
+<body>
+        <main class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8">
+  <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Submit a Complaint</h2>
+
+  <form action="/profile/complaint/<%= emp._id %>" method="POST" class="space-y-6">
+    
+    <div>
+      <label class="block text-gray-700 font-semibold mb-2">Employee ID</label>
+      <input type="text" name="employeeId" readonly required
+        value="<%=emp.id %>"
+        class="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+    </div>
+    <!-- Subject -->
+    <div>
+      <label class="block text-gray-700 font-semibold mb-2">Subject</label>
+      <input type="text" name="subject" required
+        placeholder="Enter complaint subject"
+        class="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+    </div>
+
+    <div class="mb-4">
+  <label class="block text-sm font-medium text-gray-700">Complaint Type</label>
+  <select name="type" required
+    class="mt-1 w-full rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+    <option value="">-- Select Type --</option>
+    <option>Query</option>
+    <option>Technical Issue</option>
+    <option>HR Concern</option>
+    <option>Payroll / Salary</option>
+    <option>Leave / Attendance</option>
+    <option>Workplace Safety</option>
+    <option>Harassment / Misconduct</option>
+    <option>Facilities / Infrastructure</option>
+    <option>IT Support</option>
+    <option>Training & Development</option>
+    <option>Appraisal / Promotion</option>
+    <option>Policy Related</option>
+    <option>Resource Request</option>
+    <option>System Access / Login</option>
+    <option>Other</option>
+  </select>
+</div>
+
+    <!-- Description -->
+    <div>
+      <label class="block text-gray-700 font-semibold mb-2">Description</label>
+      <textarea name="description" rows="4" required
+        placeholder="Describe your issue in detail"
+        class="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"></textarea>
+    </div>
+
+    <!-- Priority -->
+    <div>
+      <label class="block text-gray-700 font-semibold mb-2">Priority</label>
+      <select name="priority"
+        class="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+        <option value="Critical">Critical</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="text-center">
+      <button type="submit"
+        class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+        Submit Complaint
+      </button>
+    </div>
+
+  </form>
+</main>
+
+</body>
+</html>

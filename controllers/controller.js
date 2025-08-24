@@ -4,6 +4,8 @@ import Employee from "../model/Employee.js";
 import fs from "fs"
 import path from "path"
 import Task from "../model/TaskDB.js";
+import Complaint from "../model/ComplaintDB.js"
+
 
 function homepage(req, res) {
   res.render("homepage")
@@ -18,7 +20,7 @@ function homepage(req, res) {
 
 
  async function showLogin(req, res) {
-  
+
     if(req.user){
      const data = await  Employee.findOne({email : req.user.email})
      if(data.email == "admin.page@gmail.com"){
@@ -358,8 +360,85 @@ async function DeleteTask(req, res) {
 
 
 
+//complaint form 
 
 
+async function complaintForm(req, res){
+  const id = req.params.id
+  const emp = await Employee.findById(id)
+  res.render("ComplaintForm", {emp})
+}
+
+async function raisedComplaint(req, res) {
+  const id = req.params.id
+  const {employeeId, subject, type, description, priority} = req.body
+
+  const complaintsaved = new Complaint({
+    employeeId,
+    subject,
+    type,
+    description,
+    priority
+  })
+
+  await complaintsaved.save()
+
+  res.redirect(`/profile/${id}`)
+
+}
+
+
+async function showComplaints(req, res){
+
+  try{
+    const employeeId = req.params.id
+    const data = await Complaint.find({employeeId}).sort({createdAt: -1})
+    res.render("MyComplaints", {data})
+  }
+  catch(err){
+    res.send("Server Error", err.massage)
+  }
+
+}
+
+async function allComplaints (req, res){
+  try{
+    const data = await Complaint.find()
+    res.render("AdminComplaints", {data})
+  }
+  catch(err){
+    res.send("Server Error", err.massage)
+  }
+}
+
+
+async function updateComplaint(req, res) {
+  const {status, adminResponse} = req.body 
+  const compaintID = req.params.id
+
+  const updateComplaint = await Complaint.findByIdAndUpdate(compaintID, {status, adminResponse})
+  res.redirect(req.get("referer") || "/");
+
+}
+
+
+async function complaintFilter(req, res) {
+
+   const { status } = req.query;
+  let filter = {};
+
+  if (status) {
+    filter.status = status; // only filter if user selects a status
+  }
+
+  const data = await Complaint.find(filter)
+
+  res.render("AdminComplaints", {
+    data,
+    queryStatus: status || "" // pass selected filter to EJS
+  });
+
+}
 
 
 
@@ -368,10 +447,13 @@ async function Logout(req, res) {
 
   const id = req.params.id
   try {
-
     const employee = await Employee.findById(id)
     if (employee) {
-      res.cookie("token", "")
+      res.clearCookie("token", {
+      httpOnly: true,   // good practice
+      secure: true,     // only for HTTPS
+      sameSite: "strict"
+    });
     }
     res.redirect("/login")
   }
@@ -410,6 +492,12 @@ export default {
   TaskForm,
   Addtask,
   updateTask,
-  DeleteTask
+  DeleteTask,
+  complaintForm,
+  raisedComplaint,
+  showComplaints,
+  allComplaints,
+  updateComplaint,
+  complaintFilter 
 
 }

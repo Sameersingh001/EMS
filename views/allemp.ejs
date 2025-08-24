@@ -29,36 +29,38 @@
   </header>
 
   <!-- Employees Grid -->
-  <main class="max-w-8xl mx-auto mt-6 px-6 flex-1 ">
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      <% employees.forEach(emp => { %>
-        <div class="bg-white shadow-lg mt-3 rounded-xl p-6 hover:shadow-xl transition transform hover:scale-[1.02]">
-          
-          <!-- Employee Image -->
+  <main class="max-w-8xl mx-auto mt-10 px-6 flex-1">
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <% employees.forEach(emp => { %>
+      <div class="bg-white shadow-md hover:shadow-2xl rounded-2xl p-6 transition-transform transform hover:-translate-y-2">
+        
+        <!-- Employee Image -->
+        <div class="flex justify-center">
           <img src="<%= emp.imageUrl || 'https://via.placeholder.com/150' %>" 
                alt="Employee Photo"
-               class="w-24 h-24 mx-auto rounded-full object-cover shadow-md border">
-
-          <!-- Employee Info -->
-          <div class="text-center mt-4">
-            <h3 class="text-lg font-semibold text-gray-800"><%= emp.name %></h3>
-            <p class="text-sm text-gray-500"><%= emp.position %> - <%= emp.department %></p>
-            <p class="text-sm text-gray-600 mt-1 truncate"><%= emp.email %></p>
-            <p class="text-sm text-gray-600">📞 <%= emp.phone %></p>
-          </div>
-
-          <!-- Actions -->
-          <div class="mt-4">
-            <a href="/employees/<%= emp.id %>">
-              <button class="w-full px-3 py-2 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition">
-                View Employee
-              </button>
-            </a>
-          </div>
+               class="w-24 h-24 rounded-full object-cover shadow-lg border-4 border-gray-100">
         </div>
-      <% }) %>
-    </div>
-  </main>
+
+        <!-- Employee Info -->
+        <div class="text-center mt-5">
+          <h3 class="text-xl font-semibold text-gray-800"><%= emp.name %></h3>
+          <p class="text-sm text-gray-500 font-medium"><%= emp.position %> • <%= emp.department %></p>
+          <p class="text-sm text-gray-600 mt-2 truncate"><%= emp.email %></p>
+          <p class="text-sm text-gray-700 mt-1">📞 <%= emp.phone %></p>
+        </div>
+
+        <!-- Actions -->
+        <div class="mt-6">
+          <a href="/employees/<%= emp.id %>">
+            <button class="w-full px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-semibold rounded-xl shadow-md hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all duration-300">
+              View Profile
+            </button>
+          </a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</main>
 
   <!-- Footer -->
   <footer class="bg-white text-center py-4 shadow-inner">
