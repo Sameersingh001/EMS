@@ -42,6 +42,7 @@
     <div id="mobileMenu" class="hidden md:hidden flex flex-col px-4 pb-4 space-y-2 bg-gray-50 border-t">
           <a href="/profile/my-complaints/<%=data._id %>" class="text-gray-700 hover:text-indigo-600">My Complaints</a>
           <a href="/allemployees/<%=data._id %>" class="text-gray-700 hover:text-indigo-600">All Employees</a>
+          <a href="/profile/complaint/<%= data._id %>" class="text-gray-700 hover:text-indigo-600">Raise Complaint</a>
           <a href="#tasks" class="text-gray-700 hover:text-indigo-600">Tasks</a>
           <a href="/profile/update/<%= data._id %>" class="text-green-600 font-semibold hover:text-green-800">Update</a>
           <a href="/logout/<%= data._id %>" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
