@@ -307,7 +307,7 @@ async function updatefromadmin(req, res) {
 
 async function deleteemp(req, res) {
   const id = req.params.id
-  const deleted = await Employee.findByIdAndDelete(id)
+  await Employee.findByIdAndDelete(id)
 
   res.redirect("/admin")
 
@@ -441,6 +441,43 @@ async function complaintFilter(req, res) {
 }
 
 
+async function  deleteComplaint(req ,res) {
+  const Id = req.params.id
+  await Complaint.findByIdAndDelete(Id)
+  res.redirect(res.post("referer" || "/"))
+}
+
+
+async function filterByname(req, res) {
+  const {name} = req.query
+   const filter = {
+    email: { $ne: "admin.page@gmail.com" } // exclude admin
+  };
+ if (name && name.trim() !== "") {
+    filter.name = { $regex: name, $options: "i" }; // case-insensitive search
+  }
+  const admin = await Employee.findOne({email : "admin.page@gmail.com"})
+  const employees = await Employee.find(filter)
+  res.render("admin", {admin, employees, name:name || ""})
+}
+
+
+
+
+async function SearchByname(req, res) {
+  const Id = req.params.id
+  const {name} = req.query
+   const filter = {
+    email: { $ne: "admin.page@gmail.com" } // exclude admin
+  };
+ if (name && name.trim() !== "") {
+    filter.name = { $regex: name, $options: "i" }; // case-insensitive search
+  }
+  
+  const IdData = await Employee.findById(Id)
+  const employees = await Employee.find(filter)
+  res.render("allemp", {IdData, employees, name:name || ""})
+}
 
 
 async function Logout(req, res) {
@@ -498,6 +535,9 @@ export default {
   showComplaints,
   allComplaints,
   updateComplaint,
-  complaintFilter 
+  complaintFilter,
+  deleteComplaint,
+  filterByname,
+  SearchByname
 
 }

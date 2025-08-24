@@ -12,13 +12,15 @@
     <!-- Header -->
     <header class="bg-indigo-700 text-white py-4 px-6 shadow-md">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold tracking-wide">Admin Dashboard</h1>
-            <a href="/admin/all-complaints/<%= admin.id %>">
-                <button class="w-full py-2 px-4 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition duration-200">All Complaints</button>
-            </a>
-            <a href="/logout/<%= admin.id %>">
-                <button class="w-full py-2 px-4 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition duration-200">Logout</button>
-            </a>
+            <h1 class="text-sm sm:text-2xl font-bold tracking-wide">Admin Dashboard</h1>
+            <div class="flex flex-row gap-5 ">
+                <a href="/admin/all-complaints/<%= admin.id %>">
+                    <button class="w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition duration-200">Complaints</button>
+                </a>
+                <a href="/logout/<%= admin.id %>">
+                    <button class="w-full py-2 px-4 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition duration-200">Logout</button>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -49,7 +51,13 @@
         <!-- Employees Section -->
         <div>
             <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-6 tracking-tight">Employees</h2>
-            <div class="grid gap-6 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
+
+            <form action="/admin/emp" method="GET" class="flex items-center justify-center gap-2">
+                <input type="text" name="name" placeholder="Search by name" class=" sm:px-10 px-8 py-2 rounded-lg" >
+                <button type="submit" class="bg-green-300 sm:px-10 px-8 py-2 rounded-xl text-white font-bold text-xl hover:bg-blue-500 shadow-2xl">Search</button>
+            </form>
+
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 mt-5">
                 <% employees.forEach((emp)=> { %>
                     <div
                         class="bg-white p-5 sm:p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-1 border border-gray-200 hover:border-blue-500">
