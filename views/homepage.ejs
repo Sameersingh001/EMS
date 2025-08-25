@@ -3,139 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Employee Management System</title>
+  <title>Employee Management System | EMS</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* Add custom animations */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fadeIn { animation: fadeIn 1s ease-out; }
-    /* Dark theme color palette with pretty, vibrant accents */
+
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
     :root {
-      --bg-dark: #1E293B; /* Slate-800 */
-      --bg-darker: #0F172A; /* Slate-900 */
-      --text-light: #F1F5F9; /* Slate-100 */
-      --primary: #818CF8; /* Indigo-400 - Vibrant blue-purple */
-      --secondary: #F472B6; /* Pink-400 - Soft pink */
-      --accent: #FBBF24; /* Amber-400 - Warm yellow */
-      --success: #34D399; /* Emerald-400 - Fresh green */
-      --warning: #FB923C; /* Orange-400 - Energetic orange */
+      --bg-dark: #0f172a;
+      --bg-darker: #020617;
+      --text-light: #f1f5f9;
+      --primary: #6366f1;
+      --secondary: #ec4899;
+      --accent: #fbbf24;
+      --success: #22c55e;
+      --warning: #f97316;
     }
   </style>
 </head>
-<body class="bg-var(--bg-dark) text-var(--text-light) font-sans">
+<body class="bg-[var(--bg-dark)] text-[var(--text-light)] font-sans">
 
   <!-- Navbar -->
-  <header class="bg-var(--bg-darker) shadow-lg sticky top-0 z-50">
+  <header class="glass fixed w-full top-0 z-50 shadow-lg">
     <div class="container mx-auto flex justify-between items-center py-4 px-6">
-      <h1 class="text-3xl font-extrabold text-black bg-clip-text bg-gradient-to-r from-var(--primary) to-var(--secondary) animate-fadeIn">EMS</h1>
-      <nav class="space-x-4 hidden md:flex">
-        <a href="/register" class="bg-var(--accent) text-var(--bg-dark) px-4 py-2 rounded-full hover:bg-amber-300 transition transform hover:scale-105">Register Employee</a>
-        <a href="/login" class="bg-var(--success) text-var(--bg-dark) px-4 py-2 rounded-full hover:bg-emerald-300 transition transform hover:scale-105">Admin Login</a>
-        <a href="/login" class="bg-var(--warning) text-var(--bg-dark) px-4 py-2 rounded-full hover:bg-orange-300 transition transform hover:scale-105">Employee Login</a>
+      <h1 class="text-3xl font-extrabold bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] bg-clip-text text-transparent animate-fadeIn">
+        EMS
+      </h1>
+      <nav class="hidden md:flex space-x-4">
+        <a href="/register" class="px-5 py-2 rounded-full bg-[var(--accent)] text-black font-semibold shadow-md hover:scale-105 hover:bg-yellow-300 transition">Register</a>
+        <a href="/login" class="px-5 py-2 rounded-full bg-[var(--success)] text-black font-semibold shadow-md hover:scale-105 hover:bg-green-300 transition">Admin Login</a>
+        <a href="/login" class="px-5 py-2 rounded-full bg-[var(--warning)] text-black font-semibold shadow-md hover:scale-105 hover:bg-orange-300 transition">Employee Login</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="bg-gradient-to-r from-var(--bg-darker) to-var(--bg-dark) text-var(--text-light) relative overflow-hidden">
-    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/confetti.png')] opacity-10"></div>
-    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-6 py-20 relative z-10">
+  <section class="relative text-center pt-40 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-[var(--primary)] via-[var(--secondary)] to-[var(--accent)] opacity-10 animate-pulse"></div>
+    <div class="container mx-auto relative z-10 px-6">
+      <h2 class="text-4xl md:text-6xl font-extrabold mb-10 leading-tight bg-gradient-to-r from-[var(--accent)] to-[var(--warning)] bg-clip-text text-transparent">
+        Smart Employee Management System
+      </h2>
+      <p class="mb-8 text-xl md:text-2xl opacity-90">
+        Manage employees, assign tasks, track performance, and boost productivity — all in one place.
+      </p>
       
-      <!-- Left Content -->
-      <div class="md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
-        <h2 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-lg">Smart Employee Management</h2>
-        <p class="mb-8 text-xl font-light">Effortlessly manage profiles, departments, and secure data with vibrant tools for admins and employees alike.</p>
-        
-        <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 justify-center">
-          <!-- Register Employee -->
-          <a href="/register" 
-             class="bg-var(--accent) text-var(--bg-dark) font-bold px-8 py-4 rounded-full shadow-lg hover:bg-amber-300 transition transform hover:scale-105 text-center">
-             Register Employee
-          </a>
-
-          <!-- Admin Login -->
-          <a href="/login" 
-             class="bg-var(--success) text-var(--bg-dark) font-bold px-8 py-4 rounded-full shadow-lg hover:bg-emerald-300 transition transform hover:scale-105 text-center">
-             Admin Login
-          </a>
-
-          <!-- Employee Login -->
-          <a href="/login" 
-             class="bg-var(--warning) text-var(--bg-dark) font-bold px-8 py-4 rounded-full shadow-lg hover:bg-orange-300 transition transform hover:scale-105 text-center">
-             Employee Login
-          </a>
-        </div>
+      <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+        <a href="/register" class="px-8 py-4 rounded-full bg-[var(--accent)] text-black font-bold shadow-lg hover:scale-110 hover:bg-yellow-300 transition">Register Employee</a>
+        <a href="/login" class="px-8 py-4 rounded-full bg-[var(--success)] text-black font-bold shadow-lg hover:scale-110 hover:bg-green-300 transition">Admin Login</a>
+        <a href="/login" class="px-8 py-4 rounded-full bg-[var(--warning)] text-black font-bold shadow-lg hover:scale-110 hover:bg-orange-300 transition">Employee Login</a>
       </div>
-      
-      <!-- Right Image -->
-      <div class="md:w-1/2 flex justify-center animate-fadeIn delay-200">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Employee Management" class="w-96 transform hover:rotate-3 transition duration-300">
+
+      <div class="mt-16 flex justify-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135768.png" alt="Employee Management" class="w-80 md:w-96 drop-shadow-xl hover:scale-105 transition duration-500">
       </div>
     </div>
   </section>
 
   <!-- Admin Features -->
-  <section id="admin" class="py-20 container mx-auto px-6 bg-var(--bg-darker) rounded-3xl shadow-2xl my-10">
-    <h3 class="text-4xl font-bold text-center mb-12 text-var(--primary) animate-fadeIn">Admin Features</h3>
-    <div class="grid md:grid-cols-3 gap-8">
-      
-      <div class="bg-gradient-to-br from-var(--accent) to-amber-600 shadow-xl rounded-2xl p-8 text-center hover:shadow-2xl transition transform hover:scale-105">
+  <section class="py-20 container mx-auto px-6">
+    <h3 class="text-4xl font-bold text-center mb-16 animate-fadeIn bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] bg-clip-text text-transparent">Admin Features</h3>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
         <img src="https://cdn-icons-png.flaticon.com/512/3062/3062634.png" class="w-20 mx-auto mb-6" alt="Profiles">
-        <h4 class="text-2xl font-semibold mb-3 text-var(--bg-dark)">Manage Employee Profiles</h4>
-        <p class="text-var(--bg-dark)/90">Admins can add, update, and remove employee profiles with ease.</p>
+        <h4 class="text-2xl font-semibold mb-3">Manage Profiles</h4>
+        <p class="opacity-90">Add, update, and remove employee profiles with ease.</p>
       </div>
-      
-      <div class="bg-gradient-to-br from-var(--success) to-emerald-600 shadow-xl rounded-2xl p-8 text-center hover:shadow-2xl transition transform hover:scale-105">
-        <img src="https://cdn-icons-png.flaticon.com/512/3039/3039384.png" class="w-20 mx-auto mb-6" alt="Departments">
-        <h4 class="text-2xl font-semibold mb-3 text-var(--bg-dark)">Organize Departments</h4>
-        <p class="text-var(--bg-dark)/90">Assign employees to departments and teams seamlessly.</p>
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/906/906334.png" class="w-20 mx-auto mb-6" alt="Tasks">
+        <h4 class="text-2xl font-semibold mb-3">Assign & Track Tasks</h4>
+        <p class="opacity-90">Assign tasks, set deadlines, and track real-time progress.</p>
       </div>
-      
-      <div class="bg-gradient-to-br from-var(--warning) to-orange-600 shadow-xl rounded-2xl p-8 text-center hover:shadow-2xl transition transform hover:scale-105">
-        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" class="w-20 mx-auto mb-6" alt="Secure">
-        <h4 class="text-2xl font-semibold mb-3 text-var(--bg-dark)">Secure Access</h4>
-        <p class="text-var(--bg-dark)/90">Only admins have permission to manage core employee data.</p>
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/1484/1484814.png" class="w-20 mx-auto mb-6" alt="Analytics">
+        <h4 class="text-2xl font-semibold mb-3">Analytics Dashboard</h4>
+        <p class="opacity-90">View performance reports and insights instantly.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135692.png" class="w-20 mx-auto mb-6" alt="Departments">
+        <h4 class="text-2xl font-semibold mb-3">Department Management</h4>
+        <p class="opacity-90">Organize employees by departments and roles efficiently.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png" class="w-20 mx-auto mb-6" alt="Security">
+        <h4 class="text-2xl font-semibold mb-3">Secure Data</h4>
+        <p class="opacity-90">Role-based access with encrypted data security.</p>
       </div>
     </div>
   </section>
 
   <!-- Employee Features -->
-  <section id="employee" class="py-20 bg-gradient-to-br from-var(--bg-dark) to-var(--bg-darker)">
-    <div class="container mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-12 text-var(--secondary) animate-fadeIn">Employee Features</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        
-        <div class="bg-gradient-to-br from-var(--primary) to-indigo-600 shadow-xl rounded-2xl p-8 text-center hover:shadow-2xl transition transform hover:scale-105">
-          <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="w-20 mx-auto mb-6" alt="Profile">
-          <h4 class="text-2xl font-semibold mb-3 text-var(--text-light)">Personal Profile</h4>
-          <p class="text-var(--text-light)/90">Employees can view and update their personal details.</p>
-        </div>
-        
-        <div class="bg-gradient-to-br from-var(--secondary) to-pink-600 shadow-xl rounded-2xl p-8 text-center hover:shadow-2xl transition transform hover:scale-105">
-          <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png" class="w-20 mx-auto mb-6" alt="Work Info">
-          <h4 class="text-2xl font-semibold mb-3 text-var(--text-light)">Work Information</h4>
-          <p class="text-var(--text-light)/90">Check assigned department, role, and responsibilities.</p>
-        </div>
-        
-        <div class="bg-gradient-to-br from-var(--accent) to-amber-600 shadow-xl rounded-2xl p-8 text-center hover:shadow-2xl transition transform hover:scale-105">
-          <img src="https://cdn-icons-png.flaticon.com/512/2620/2620476.png" class="w-20 mx-auto mb-6" alt="Communication">
-          <h4 class="text-2xl font-semibold mb-3 text-var(--bg-dark)">Communication</h4>
-          <p class="text-var(--bg-dark)/90">Easily connect with admins and management.</p>
-        </div>
+  <section class="py-20 container mx-auto px-6">
+    <h3 class="text-4xl font-bold text-center mb-16 animate-fadeIn bg-gradient-to-r from-[var(--accent)] to-[var(--warning)] bg-clip-text text-transparent">Employee Features</h3>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135810.png" class="w-20 mx-auto mb-6" alt="Profile">
+        <h4 class="text-2xl font-semibold mb-3">My Profile</h4>
+        <p class="opacity-90">Employees can view and update their personal details.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/2010/2010994.png" class="w-20 mx-auto mb-6" alt="Tasks">
+        <h4 class="text-2xl font-semibold mb-3">View Tasks</h4>
+        <p class="opacity-90">Check assigned tasks, deadlines, and status updates.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/709/709496.png" class="w-20 mx-auto mb-6" alt="Complaints">
+        <h4 class="text-2xl font-semibold mb-3">Raise Complaints</h4>
+        <p class="opacity-90">Submit complaints or requests directly to the admin.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl shadow-lg text-center hover:scale-105 transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/681/681494.png" class="w-20 mx-auto mb-6" alt="Leave">
+        <h4 class="text-2xl font-semibold mb-3">Leave Requests</h4>
+        <p class="opacity-90">Apply for leave and track approval status.</p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer id="contact" class="bg-gradient-to-r from-var(--bg-darker) to-var(--bg-dark) text-var(--text-light) py-10 mt-10">
-    <div class="container mx-auto text-center">
-      <h5 class="text-xl font-bold mb-3">Employee Management System</h5>
-      <p class="mb-4">Contact us at: support@ems.com</p>
-      <p class="text-sm">© 2025 EMS. All rights reserved.</p>
-    </div>
+  <footer class="mt-20 py-10 bg-gradient-to-r from-[var(--bg-darker)] to-[var(--bg-dark)] text-center glass">
+    <h5 class="text-xl font-bold mb-2">Employee Management System</h5>
+    <p class="opacity-80">Contact us: <span class="font-semibold">support@ems.com</span></p>
+    <p class="text-sm opacity-70 mt-3">© 2025 EMS. All rights reserved.</p>
   </footer>
 
 </body>

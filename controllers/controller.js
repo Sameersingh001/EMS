@@ -352,6 +352,42 @@ async function updateTask(req, res) {
 }
 
 
+
+
+async function assingTasks(req, res) {
+  const employees = await Employee.find({email : {$ne : "admin.page@gmail.com"}})
+  res.render("MultipleTasks", {employees})
+}
+
+
+async function tasksAssinged(req, res) {
+  const {employees, title, description, deadline, status} =req.body
+
+  if(!employees || employees.length === 0){
+    return res.send("No employee is Selected")
+  }
+
+  const employeeArray = Array.isArray(employees) ? employees : [employees];
+
+  const task = new Task({
+    assignedTo : employeeArray,
+    title,
+    deadline,
+    description,
+    status
+  })
+
+  await task.save()
+  res.redirect("/admin")
+
+}
+
+
+
+
+
+
+
 async function DeleteTask(req, res) {
   const TasksId = req.params.id
   await Task.findByIdAndDelete(TasksId)
@@ -538,6 +574,8 @@ export default {
   complaintFilter,
   deleteComplaint,
   filterByname,
-  SearchByname
+  SearchByname,
+  assingTasks,
+  tasksAssinged
 
 }

@@ -14,6 +14,7 @@ router.get("/admin/task-form/:id", Verify, controller.TaskForm)
 router.get("/profile/complaint/:id", Verify, controller.complaintForm)
 router.get("/profile/my-complaints/:id",Verify, controller.showComplaints)
 router.get("/admin/all-complaints/:id",Verify, controller.allComplaints)
+router.get("/admin/tasks",Verify, controller.assingTasks)
 
 
 
@@ -32,6 +33,8 @@ router.get("/delete/:id", controller.deleteemp)
 router.post("/admin/complaints/delete/:id", controller.deleteComplaint)
 router.post("/admin/complaints/update/:id", controller.updateComplaint)
 
+
+router.post("/admin/assigned-tasks", controller.tasksAssinged)
 router.post("/profile/complaint/:id",controller.raisedComplaint)
 router.post("/admin/update/emp/:id", controller.updatefromadmin)
 router.post('/register', upload.single("imageUrl"), controller.Register)
