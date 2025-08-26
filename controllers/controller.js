@@ -5,6 +5,7 @@ import fs from "fs"
 import path from "path"
 import Task from "../model/TaskDB.js";
 import Complaint from "../model/ComplaintDB.js"
+import notice from "../model/noticeDB.js"
 
 
 function homepage(req, res) {
@@ -38,7 +39,8 @@ async function Deshboard(req, res) {
     const id = req.params.id
     const data = await Employee.findOne({ email: req.user.email })
     const taskData = await Task.find({ assignedTo: id })
-    res.render("Profile", { data, taskData });
+    const noticeData = await notice.find()
+    res.render("Profile", { data, taskData, noticeData });
   } catch (err) {
     res.send("Server Issue" + err.massage)
   }
@@ -516,6 +518,28 @@ async function SearchByname(req, res) {
 }
 
 
+function noticeForm(req, res){
+  res.render("Notice")
+}
+
+async function noticeAdded(req, res) {
+  const {title, message, noticeDate} =req.body  
+
+  const newNotice = new notice({
+    title,
+    message,
+    noticeDate
+  })
+
+  await newNotice.save()
+  res.redirect("/admin")
+}
+
+
+
+
+
+
 async function Logout(req, res) {
 
   const id = req.params.id
@@ -576,6 +600,8 @@ export default {
   filterByname,
   SearchByname,
   assingTasks,
-  tasksAssinged
+  tasksAssinged,
+  noticeForm,
+  noticeAdded
 
 }

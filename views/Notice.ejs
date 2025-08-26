@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Notice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url('https://images.unsplash.com/photo-1570745836374-317e7ec1332e?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Customized corkboard texture for a classic notice board theme */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .form-container {
+      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white overlay for better readability on textured background */
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen font-sans">
+  <div class="form-container shadow-xl rounded-2xl p-8 w-full max-w-lg border border-white-200 bg-opacity-50 bg-black text-white">
+    <!-- Notice Icon -->
+    <div class="flex justify-center mb-6">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-bell text-white" viewBox="0 0 16 16">
+        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+      </svg>
+    </div>
+    
+    <h2 class="text-2xl font-bold text-center mb-6 text-white">Create Your Notice</h2>
+    
+    <form action="/notice/add" method="POST" class="space-y-6 ">
+      <!-- Title -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Title</label>
+        <input type="text" name="title" required 
+               placeholder="Enter a clear title for your notice"
+               class="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200">
+      </div>
+      
+      <!-- Message -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Message</label>
+        <textarea name="message" required rows="4"
+                  placeholder="Write your notice details here... Keep it concise!"
+                  class="w-full p-3 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200"></textarea>
+      </div>
+      
+      <!-- Notice Date -->
+      <div>
+        <label class="block text-sm font-medium  mb-1">Notice Date</label>
+        <input type="date" name="noticeDate"
+               value="<%= new Date().toISOString().split('T')[0] %>" 
+               class="w-full p-3 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200">
+        <p class="text-xs  mt-1">Defaults to today if left blank.</p>
+      </div>
+      
+      <!-- Submit Button -->
+      <button type="submit" 
+              class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200 font-medium">
+        Submit Notice
+      </button>
+    </form>
+  </div>
+</body>
+</html>

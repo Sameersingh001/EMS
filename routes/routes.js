@@ -25,7 +25,7 @@ router.get("/admin/update/emp/:id", Verify, controller.adminEmpUpdate)
 router.get("/admin/filter", Verify, controller.complaintFilter)
 router.get("/admin/emp",Verify, controller.filterByname)
 router.get("/:id/emp/search",Verify, controller.SearchByname)
-
+router.get("/admin/notice/:id", Verify, controller.noticeForm)
 
 router.get("/logout/:id", controller.Logout)
 router.get("/delete/:id", controller.deleteemp)
@@ -34,6 +34,7 @@ router.post("/admin/complaints/delete/:id", controller.deleteComplaint)
 router.post("/admin/complaints/update/:id", controller.updateComplaint)
 
 
+router.post("/notice/add", controller.noticeAdded)
 router.post("/admin/assigned-tasks", controller.tasksAssinged)
 router.post("/profile/complaint/:id",controller.raisedComplaint)
 router.post("/admin/update/emp/:id", controller.updatefromadmin)

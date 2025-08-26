@@ -37,7 +37,7 @@
   </form>
   <!-- Employees Grid -->
   <main class="max-w-8xl mx-auto mt-10 px-6 flex-1">
-    <div class="grid gap-8 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4">
+    <div class="grid gap-4 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4">
       <% employees.forEach(emp=> { %>
         <div
           class="bg-white shadow-md hover:shadow-2xl rounded-2xl p-6 transition-transform transform hover:-translate-y-2">
@@ -53,12 +53,11 @@
               <%= emp.name %>
             </h3>
             <p class="text-sm text-gray-500 font-medium">
-              <%= emp.position %> • <%= emp.department %>
+             position : <%= emp.position %> • <%= emp.department %>
             </p>
             <p class="text-sm text-gray-600 mt-2 truncate">
-              <%= emp.email %>
-            </p>
-            <p class="text-sm text-gray-700 mt-1">📞 <%= emp.phone %>
+             <%= emp.email %>  
+              || 📞 <%= emp.phone %>
             </p>
           </div>
 

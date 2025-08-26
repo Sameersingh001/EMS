@@ -45,9 +45,11 @@
                     <p class="text-sm opacity-90 mt-1">Admin ID: <%= admin.id %>
                     </p> <!-- Assuming an 'id' field -->
                 </div>
-                <div class="flex  w-full mt-3 items-center justify-center">
+                <div class="flex sm:flex-row flex-col gap-2 sm:w-1/2 w-full mt-3 items-center justify-around">
                     <a href="/admin/tasks"><button class="bg-blue-500 px-8 py-2 shadow-2xl hover:bg-blue-600  font-semibold rounded-2xl ">Give Multiple Tasks</button></a>
+                    <a href="/admin/notice/<%= admin.id %>"><button class="bg-green-500 px-12 py-2 shadow-2xl hover:bg-green-600  font-semibold rounded-2xl ">Send Notices</button></a>
                 </div>
+
             </div>  
         </div>
 
