@@ -8,19 +8,40 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="bg-gradient-to-br from-pink-200 via-purple-200 to-indigo-300 font-sans min-h-screen flex flex-col">
 
   <!-- Navbar -->
-  <nav class="bg-white shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <!-- Logo / Heading -->
-      <h1 class="text-2xl font-bold text-indigo-700">EMS</h1>
-      <!-- Logout -->
-      <a href="/logout/<%= IdData.id %>">
-        <button class="bg-red-500 px-4 py-2 font-semibold text-white rounded-lg hover:bg-red-600 transition">
-          Logout
-        </button>
-      </a>
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+
+        <!-- Logo -->
+        <a href="/" class="text-xl font-bold text-indigo-600">EMS</a>
+
+        <!-- Menu Links -->
+        <div class="hidden md:flex space-x-6">
+          <a href="/profile/<%=IdData.id %>" class="text-gray-700 hover:text-indigo-600">Home</a>
+          <a href="/profile/my-complaints/<%= IdData._id %>" class="text-gray-700 hover:text-indigo-600">My Complaints</a>
+          <a href="/profile/complaint/<%= IdData._id %>" class="text-gray-700 hover:text-indigo-600">Raise Complaint</a>
+          <a href="/profile/update/<%= IdData._id %>" class="text-green-600 font-semibold hover:text-green-700">Update
+            Profile</a>
+          <a href="/logout/<%= IdData._id %>" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <button id="menuBtn" class="text-gray-700 focus:outline-none">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden flex flex-col px-4 pb-4 space-y-2 bg-gray-50 border-t">
+      <a href="/profile/<%=IdData.id %>" class="text-gray-700 hover:text-indigo-600">Home</a>
+      <a href="/profile/my-complaints/<%= IdData._id %>" class="text-gray-700 hover:text-indigo-600">My Complaints</a>
+      <a href="/profile/complaint/<%= IdData._id %>" class="text-gray-700 hover:text-indigo-600">Raise Complaint</a>
+      <a href="/profile/update/<%= IdData._id %>" class="text-green-600 font-semibold hover:text-green-800">Update</a>
+      <a href="/logout/<%= IdData._id %>" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
     </div>
   </nav>
 
@@ -76,9 +97,19 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-white text-center py-4 shadow-inner">
+  <footer class="bg-white text-center py-4 mt-10 shadow-inner">
     <p class="text-sm text-gray-500">&copy; <%= new Date().getFullYear() %> Employee Management System</p>
   </footer>
+
+
+
+    <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 
 </body>
 

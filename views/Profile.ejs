@@ -31,7 +31,6 @@
           <a href="/allemployees/<%= data._id %>" class="text-gray-700 hover:text-indigo-600">All Employees</a>
           <a href="/profile/complaint/<%= data._id %>" class="text-gray-700 hover:text-indigo-600">Raise Complaint</a>
           <a href="#tasks" class="text-gray-700 hover:text-indigo-600">View Tasks</a>
-          <a href="#notices" class="text-gray-700 hover:text-indigo-600">Notice Board</a>
           <a href="/profile/update/<%= data._id %>" class="text-green-600 font-semibold hover:text-green-700">Update
             Profile</a>
           <a href="/logout/<%= data._id %>" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
@@ -249,12 +248,12 @@
         </section>
 
       </div>
-
-
-
-
     </div>
+
   </main>
+    <footer class="bg-white text-center py-4 shadow-inner">
+    <p class="text-sm text-gray-500">&copy; <%= new Date().getFullYear() %> Employee Management System</p>
+  </footer>
 
   <!-- Mobile Menu Toggle -->
   <script>

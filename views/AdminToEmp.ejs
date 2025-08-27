@@ -9,7 +9,7 @@
     html { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen">
+<body class="bg-gradient-to-br from-pink-200 via-purple-200 to-indigo-300 font-sans min-h-screen">
 
   <!-- Top Navbar with Actions -->
   <nav class="sticky top-0 z-50 bg-white shadow-md border-b border-gray-200">
@@ -30,7 +30,7 @@
             <button class="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition">Delete</button>
           </a>
           <a href="/admin">
-            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">Back to Admin</button>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700 transition">Home</button>
           </a>
           <a href="/admin/update/emp/<%= emp.id %>">
             <button class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 transition">Update</button>
@@ -60,7 +60,7 @@
       </a>
       <hr class="my-2">
       <a href="/admin">
-        <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700">Back to Admin</button>
+        <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-700">Home</button>
       </a>
       <hr class="my-2">
       <a href="/admin/update/emp/<%= emp.id %>">

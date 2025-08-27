@@ -7,8 +7,42 @@
 
     <title>Complaint Form</title>
 </head>
-<body>
-        <main class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8">
+<body class="bg-gradient-to-br from-pink-200 via-purple-200 to-indigo-300 font-sans">
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+
+        <!-- Logo -->
+        <a href="/" class="text-xl font-bold text-indigo-600">EMS</a>
+
+        <!-- Menu Links -->
+        <div class="hidden md:flex space-x-6">
+          <a href="/profile/<%=emp.id %>" class="text-gray-700 hover:text-indigo-600">Home</a>
+          <a href="/profile/my-complaints/<%= emp._id %>" class="text-gray-700 hover:text-indigo-600">My Complaints</a>
+          <a href="/allemployees/<%= emp._id %>" class="text-gray-700 hover:text-indigo-600">All Employees</a>
+          <a href="/profile/update/<%= emp._id %>" class="text-green-600 font-semibold hover:text-green-700">Update
+            Profile</a>
+          <a href="/logout/<%= emp._id %>" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden">
+          <button id="menuBtn" class="text-gray-700 focus:outline-none">☰</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden flex flex-col px-4 pb-4 space-y-2 bg-gray-50 border-t">
+      <a href="/profile/<%=emp.id %>" class="text-gray-700 hover:text-indigo-600">Home</a>
+      <a href="/profile/my-complaints/<%= emp._id %>" class="text-gray-700 hover:text-indigo-600">My Complaints</a>
+      <a href="/allemployees/<%= emp._id %>" class="text-gray-700 hover:text-indigo-600">All Employees</a>
+      <a href="/profile/update/<%= emp._id %>" class="text-green-600 font-semibold hover:text-green-800">Update</a>
+      <a href="/logout/<%= emp._id %>" class="text-red-600 font-semibold hover:text-red-700">Logout</a>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-2xl p-8">
   <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Submit a Complaint</h2>
 
   <form action="/profile/complaint/<%= emp._id %>" method="POST" class="space-y-6">
@@ -80,6 +114,19 @@
 
   </form>
 </main>
+
+  <footer class="bg-white mt-10 text-center py-4 shadow-inner">
+    <p class="text-sm text-gray-500">&copy; <%= new Date().getFullYear() %> Employee Management System</p>
+  </footer>
+
+
+    <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 
 </body>
 </html>

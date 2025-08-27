@@ -431,7 +431,8 @@ async function showComplaints(req, res){
   try{
     const employeeId = req.params.id
     const data = await Complaint.find({employeeId}).sort({createdAt: -1})
-    res.render("MyComplaints", {data})
+    const emp = await Employee.findById(employeeId)
+    res.render("MyComplaints", {data, emp})
   }
   catch(err){
     res.send("Server Error", err.massage)
