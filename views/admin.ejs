@@ -17,6 +17,9 @@
                 <a href="/admin/all-complaints/<%= admin.id %>">
                     <button class="w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition duration-200">Complaints</button>
                 </a>
+                <a href="/admin/all-taks/<%= admin.id %>">
+                    <button class="w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition duration-200">All Tasks</button>
+                </a>
                 <a href="/logout/<%= admin.id %>">
                     <button class="w-full py-2 px-4 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition duration-200">Logout</button>
                 </a>
@@ -46,7 +49,7 @@
                     </p> <!-- Assuming an 'id' field -->
                 </div>
                 <div class="flex sm:flex-row flex-col gap-2 sm:w-1/2 w-full mt-3 items-center justify-around">
-                    <a href="/admin/tasks"><button class="bg-blue-500 px-8 py-2 shadow-2xl hover:bg-blue-600  font-semibold rounded-2xl ">Give Multiple Tasks</button></a>
+                    <a href="/admin/tasks"><button class="bg-blue-500 px-8 py-2 shadow-2xl hover:bg-blue-600  font-semibold rounded-2xl ">Assign Tasks</button></a>
                     <a href="/admin/notice/<%= admin.id %>"><button class="bg-green-500 px-12 py-2 shadow-2xl hover:bg-green-600  font-semibold rounded-2xl ">Send Notices</button></a>
                 </div>
 

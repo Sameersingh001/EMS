@@ -385,6 +385,11 @@ async function tasksAssinged(req, res) {
 }
 
 
+async function allTask(req, res) {
+  const tasksData =await Task.find()
+  const admin = await Employee.findOne({email: "admin.page@gmail.com"})
+  res.render("AllTask", {tasksData, admin})
+}
 
 
 
@@ -443,7 +448,8 @@ async function showComplaints(req, res){
 async function allComplaints (req, res){
   try{
     const data = await Complaint.find()
-    res.render("AdminComplaints", {data})
+    const admin = await Employee.findOne({email:"admin.page@gmail.com"})
+    res.render("AdminComplaints", {data, admin})
   }
   catch(err){
     res.send("Server Error", err.massage)
@@ -455,7 +461,7 @@ async function updateComplaint(req, res) {
   const {status, adminResponse} = req.body 
   const compaintID = req.params.id
 
-  const updateComplaint = await Complaint.findByIdAndUpdate(compaintID, {status, adminResponse})
+  await Complaint.findByIdAndUpdate(compaintID, {status, adminResponse})
   res.redirect(req.get("referer") || "/");
 
 }
@@ -483,7 +489,7 @@ async function complaintFilter(req, res) {
 async function  deleteComplaint(req ,res) {
   const Id = req.params.id
   await Complaint.findByIdAndDelete(Id)
-  res.redirect(res.post("referer" || "/"))
+  res.redirect(req.get("referer" || "/"))
 }
 
 
@@ -519,8 +525,10 @@ async function SearchByname(req, res) {
 }
 
 
-function noticeForm(req, res){
-  res.render("Notice")
+async function noticeForm(req, res){
+  const noticeData = await notice.find()
+  const admin = await Employee.findOne({email : "admin.page@gmail.com"})
+  res.render("Notice", {noticeData, admin})
 }
 
 async function noticeAdded(req, res) {
@@ -533,11 +541,15 @@ async function noticeAdded(req, res) {
   })
 
   await newNotice.save()
-  res.redirect("/admin")
+  res.redirect(req.get("referer") || "/");
 }
 
 
-
+async function deleteNotice(req ,res){
+  const Id = req.params.id
+  await notice.findByIdAndDelete(Id)
+  res.redirect(req.get("referer") || "/");
+}
 
 
 
@@ -603,6 +615,8 @@ export default {
   assingTasks,
   tasksAssinged,
   noticeForm,
-  noticeAdded
+  noticeAdded,
+  deleteNotice,
+  allTask
 
 }

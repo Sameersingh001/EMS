@@ -6,59 +6,142 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background-image: url('https://images.unsplash.com/photo-1570745836374-317e7ec1332e?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Customized corkboard texture for a classic notice board theme */
+      background-image: url('https://images.unsplash.com/photo-1570745836374-317e7ec1332e?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
       background-size: cover;
       background-position: center;
-      background-repeat: no-repeat;
-    }
-    .form-container {
-      background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white overlay for better readability on textured background */
+      background-repeat: repeat;
     }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen font-sans">
-  <div class="form-container shadow-xl rounded-2xl p-8 w-full max-w-lg border border-white-200 bg-opacity-50 bg-black text-white">
-    <!-- Notice Icon -->
-    <div class="flex justify-center mb-6">
-      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-bell text-white" viewBox="0 0 16 16">
-        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+<body>
+
+    <header class="bg-indigo-700  w-full fixed top-0 text-white py-4 px-6 shadow-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-sm sm:text-2xl font-bold tracking-wide">Admin Dashboard</h1>
+            <div class="flex flex-row gap-5 ">
+                <a href="/admin">
+                    <button class="w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition duration-200">Home</button>
+                </a>
+                <a href="/admin/all-complaints/<%=admin.id %>">
+                    <button class="w-full py-2 px-4 bg-blue-500 text-white text-sm font-medium rounded-lg hover:bg-blue-600 transition duration-200">Complaints</button>
+                </a>
+                <a href="/logout/<%= admin.id %>">
+                    <button class="w-full py-2 px-4 bg-red-500 text-white text-sm font-medium rounded-lg hover:bg-red-600 transition duration-200">Logout</button>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="min-h-screen mt-20 font-sans flex flex-col lg:flex-row items-start lg:items-center justify-center gap-10 p-4">
+
+      <!-- Notice Board -->
+      <aside class="w-full lg:w-1/3" id="notices">
+        <div class="bg-blue-200 mt-6 lg:mt-0 shadow-lg rounded-2xl p-6 border border-gray-200">
+      <h2 class="text-xl font-bold text-indigo-800 mb-4 flex items-center">
+        <span class="text-2xl mr-2">🔔</span> Notice Board
+      </h2>
+      
+      <% if (noticeData && noticeData.length> 0) { %>
+        <div id="noticeContainer"
+        class="space-y-4 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        <% noticeData.forEach(notice=> { %>
+          <div class="flex items-start gap-4 bg-gradient-to-r from-indigo-50 to-white p-4 rounded-xl shadow-md hover:shadow-lg">
+            <!-- Icon -->
+            <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold">
+              📢
+            </div>
+            
+            <!-- Notice Content -->
+            <div class="flex-1">
+              <div class="flex justify-between items-center flex-wrap gap-1">
+                <h3 class="font-semibold text-indigo-700 text-sm break-words"><%= notice.title %></h3>
+                <span class="text-xs text-gray-500"><%= notice.noticeDate ? notice.noticeDate.toDateString() : "Not set" %></span>
+              </div>
+              <p class="text-gray-700 text-sm mt-1 break-words">
+                <%= notice.message || "No message" %>
+              </p>
+            </div>
+            <form action="/deleteNotice/<%=notice._id %>" method="post">
+              <button type="submit" class="bg-red-400 hover:bg-red-600 text-white font-semibold text-md px-2 rounded-full shadow-2xl">Delete</button>
+            </form>
+            
+          </div>
+          <% }) %>
+        </div>
+        <% } else { %>
+        <p class="text-gray-700 text-center">No notices available yet.</p>
+        <% } %>
+      </div>
+    </aside>
+    
+    <!-- Form Section -->
+    <div class="form-container shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-lg border border-white-200 bg-opacity-60 bg-black text-white">
+      
+      <!-- Notice Icon -->
+      <div class="flex justify-center mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
+        class="bi bi-bell text-white" viewBox="0 0 16 16">
+        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 
+        6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 
+        2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 
+        8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 
+        12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 
+        10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 
+        1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
       </svg>
     </div>
     
     <h2 class="text-2xl font-bold text-center mb-6 text-white">Create Your Notice</h2>
     
-    <form action="/notice/add" method="POST" class="space-y-6 ">
+    <form action="/notice/add" method="POST" class="space-y-6">
       <!-- Title -->
       <div>
         <label class="block text-sm font-medium mb-1">Title</label>
-        <input type="text" name="title" required 
-               placeholder="Enter a clear title for your notice"
-               class="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200">
+        <input type="text" name="title" required
+        placeholder="Enter a clear title for your notice"
+        class="w-full text-black p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200">
       </div>
       
       <!-- Message -->
       <div>
         <label class="block text-sm font-medium mb-1">Message</label>
         <textarea name="message" required rows="4"
-                  placeholder="Write your notice details here... Keep it concise!"
-                  class="w-full p-3 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200"></textarea>
+        placeholder="Write your notice details here... Keep it concise!"
+        class="w-full p-3 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200"></textarea>
       </div>
       
       <!-- Notice Date -->
       <div>
-        <label class="block text-sm font-medium  mb-1">Notice Date</label>
+        <label class="block text-sm font-medium mb-1">Notice Date</label>
         <input type="date" name="noticeDate"
-               value="<%= new Date().toISOString().split('T')[0] %>" 
-               class="w-full p-3 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200">
-        <p class="text-xs  mt-1">Defaults to today if left blank.</p>
+        value="<%= new Date().toISOString().split('T')[0] %>" 
+        class="w-full p-3 text-black border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none focus:border-blue-500 transition duration-200">
+        <p class="text-xs mt-1">Defaults to today if left blank.</p>
       </div>
       
       <!-- Submit Button -->
-      <button type="submit" 
-              class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200 font-medium">
-        Submit Notice
-      </button>
-    </form>
-  </div>
+      <button type="submit"
+      class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none transition duration-200 font-medium">
+      Submit Notice
+    </button>
+  </form>
+</div>
+
+</main>
+<!-- Auto Scrolling Script -->
+<script>
+  const container = document.getElementById("noticeContainer");
+  
+  function autoScroll() {
+    if (!container) return;
+      container.scrollTop += 1;
+      if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+        container.scrollTop = 0;
+      }
+    }
+    
+    setInterval(autoScroll, 40);
+    </script>
 </body>
 </html>
