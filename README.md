@@ -142,7 +142,3 @@ npm start
 See `LICENSE` for more details.
 
 ---
-
-
-Would you like me to also add **fancy GitHub badges** (Build Passing, License, Made with Node.js, etc.) at the top? They make the README look even more professional 🔥.
-```
